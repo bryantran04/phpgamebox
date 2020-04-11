@@ -1,3 +1,14 @@
+<?php
+session_start();
+?>
+<?php
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['username']);
+    $mainpage = "index.php";
+    header("Location: " . $mainpage);
+}
+?>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-lg large-nav">
     <div class="container-fluid">
         <ul class="navbar-nav mr-auto">
@@ -38,7 +49,6 @@
                     <a class="nav-link" href="signup.php">Sign up</a>
                 </li>
             <?php endif ?>
-
         </ul>
     </div>
 </nav>
@@ -70,7 +80,7 @@
                     <a class="nav-link" href="login.php">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign up</a>
+                    <a class="nav-link" href="signup.php">Sign up</a>
                 </li>
             <?php endif ?>
             <li class="nav-item">

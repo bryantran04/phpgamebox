@@ -4,15 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'cdn.php'; ?>
+    <?php include('cdn.php'); ?>
 
-    <?php
-    session_start();
-    if (isset($_GET['logout'])) {
-        session_destroy();
-        unset($_SESSION['username']);
-    }
-    ?>
+
 
     <title>Gamebox</title>
 </head>
@@ -46,13 +40,11 @@
     </div>
 
     <?php if (isset($_SESSION['username'])) : ?>
+
         <p>Hello User</p>
     <?php endif ?>
 
-
-
     <?php include('scripts.php'); ?>
-
 
 </body>
 
