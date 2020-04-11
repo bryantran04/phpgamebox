@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Condition</label>
-                <select class="form-control" id="condition" name="condition">
+                <select class="form-control" id="game_condition" name="game_condition">
                     <option>New</option>
                     <option>Used</option>
                 </select>
@@ -67,14 +67,14 @@
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" rows="3"></textarea>
+                <textarea class="form-control" id="description" rows="3" name = "description"></textarea>
                 <p>Number of characters: <span id="length_description">0</span></p>
                 <div id="description_warning" class="warning">Description must be less than 1000 characters</div>
             </div>
             <form>
                 <div class="form-group">
                     <label for="picture">Upload Photo</label>
-                    <input type="file" class="form-control-file" id="photo">
+                    <input type="file" class="form-control-file" id="photo" name = "photo">
                 </div>
             </form>
             <button name="submit_listing" type="submit" class="btn btn-primary">Submit</button>

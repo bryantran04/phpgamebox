@@ -4,6 +4,8 @@ session_start();
 $errors = array();
 echo "<p>Hello</p>";
 var_dump($GLOBALS);
+echo $_POST;
+
 if (isset($_POST['submit_listing'])) {
     // receive all input values from the form
     $title = $_POST['title'];
@@ -20,7 +22,7 @@ if (isset($_POST['submit_listing'])) {
 
     echo "<p>Test2</p>";
 
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+    if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
         $msg = "Image uploaded successfully";
     } else {
         array_push($errors, "Failed to upload image");
