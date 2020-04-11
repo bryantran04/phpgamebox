@@ -21,8 +21,8 @@ $hostname = 'localhost:3306';
 $dbname = 'gamebox';
 
 // database credentials
-$username = 'gamebox';
-$password = 'uva2020';
+$username = 'misran';
+$password = 'Misran1';
 
 // DSN (Data Source Name) specifies the host computer for the MySQL database 
 // and the name of the database. If the MySQL database is running on the same server
@@ -44,7 +44,7 @@ try {
     //  $db = new PDO("mysql:host=$hostname;dbname=$dbname, $username, $password);
     $db = new PDO($dsn, $username, $password);
     // dispaly a message to let us know that we are connected to the database 
-    // echo "<p>You are connected to the database</p>";
+    echo "<p>You are connected to the database</p>";
 } catch (PDOException $e)     // handle a PDO exception (errors thrown by the PDO library)
 {
     // Call a method from any object, use the object's name followed by -> and then method's name
