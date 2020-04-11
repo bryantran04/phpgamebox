@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 $errors = array();
 
 if (isset($_POST['register'])) {
