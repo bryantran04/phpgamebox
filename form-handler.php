@@ -1,18 +1,17 @@
-
 <?php
-// session_start();
 
+session_start();
 $errors = array();
 
 if (isset($_POST['register'])) {
     // receive all input values from the form
-    $username = ($_POST['username']);
-    $email = ($_POST['email']);
-    $password = ($_POST['password']);
-    $confirmpassword = ($_POST['confirmpassword']);
-    $firstname = ($_POST['firstname']);
-    $lastname = ($_POST['lastname']);
-    $description = ($_POST['description']);
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmpassword = $_POST['confirmpassword'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $description = $_POST['description'];
     $picture = $_FILES['image']['name'];
     $target = "submitted_pictures/" . basename($picture);
 
@@ -38,7 +37,7 @@ if (isset($_POST['register'])) {
     $statement->closecursor();
 
 
-    if (count($result) > 0) { // if user exists
+    if (count($result) > 0) {
         if ($result[0]['username'] === $username) {
             array_push($errors, "Username already exists");
         }
@@ -70,11 +69,11 @@ if (isset($_POST['register'])) {
         $statement->bindValue(':description', $description);
         $statement->bindValue(':picture', $picture);
         $statement->execute();
-        $statement->closeCursor();        // $_SESSION['username'] = $username;
-        // $_SESSION['success'] = "You are now logged in";
+        $statement->closeCursor();
+        $_SESSION['username'] = $username;
+        $_SESSION['success'] = "You are now logged in";
         $mainpage = "index.php";
 
         header("Location: " . $mainpage);
     }
 }
-?>

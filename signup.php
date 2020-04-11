@@ -15,6 +15,8 @@
 
 <body>
     <?php include('form-handler.php') ?>
+    <?php include('errors.php'); ?>
+
     <main class="my-form">
         <div class="cotainer">
             <div class="row justify-content-center">
