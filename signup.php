@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <?php include('connect-db.php'); ?>
-<?php include('navbar.html'); ?>
+<?php include('navbar.php'); ?>
 <link rel="stylesheet" href="styles/signup.css">
 
 

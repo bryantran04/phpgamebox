@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include 'cdn.php'; ?>
 
+    <?php
+    session_start();
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        unset($_SESSION['username']);
+    }
+    ?>
+
     <title>Gamebox</title>
 </head>
 
@@ -14,11 +22,9 @@
         <div id="nav-placeholder"></div>
         <!-- Will remove after we start php -->
         <?php include 'connect-db.php'; ?>
-        <?php include 'navbar.html'; ?>
+        <?php include 'navbar.php'; ?>
 
     </header>
-
-
 
 
     <div class="showcase">
@@ -40,6 +46,9 @@
 
     </div>
 
+    <?php if (isset($_SESSION['username'])) : ?>
+        <p>Hello User</p>
+    <?php endif ?>
 
 
 
