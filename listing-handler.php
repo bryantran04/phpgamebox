@@ -15,46 +15,10 @@ if (isset($_POST['submit_listing'])) {
     $description = $_POST['description'];
     //title	description	location	price	console	sold	picture, need condition and game
 
-    // $username = $_POST['username'];
-    // $email = $_POST['email'];
-    // $password = $_POST['password'];
-    // $confirmpassword = $_POST['confirmpassword'];
-    // $firstname = $_POST['firstname'];
-    // $lastname = $_POST['lastname'];
     $picture = $_FILES['photo']['name'];
     $target = "submitted_pictures/" . basename($picture);
 
-
-    // if (empty($username)) {
-    //     array_push($errors, "Username is required");
-    // }
-    // if (empty($email)) {
-    //     array_push($errors, "Email is required");
-    // }
-    // if (empty($password)) {
-    //     array_push($errors, "Password is required");
-    // }
-    // if ($password != $confirmpassword) {
-    //     array_push($errors, "The two passwords do not match");
-    // }
     echo "<p>Test2</p>";
-
-    // $user_check_query = "SELECT * FROM listing WHERE username='$username' OR email='$email' LIMIT 1";
-    // $statement = $db->prepare($user_check_query);
-    // $statement->execute();
-    // $result = $statement->fetchAll();
-    // $statement->closecursor();
-
-
-    // if (count($result) > 0) {
-    //     if ($result[0]['username'] === $username) {
-    //         array_push($errors, "Username already exists");
-    //     }
-
-    //     if ($result[0]['email'] === $email) {
-    //         array_push($errors, "email already exists");
-    //     }
-    // }
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
         $msg = "Image uploaded successfully";
@@ -99,45 +63,3 @@ if (isset($_POST['submit_listing'])) {
         header("Location: " . $mainpage);
     }
 }
-
-
-// if (isset($_POST['login'])) {
-//     // receive all input values from the form
-//     $username = $_POST['username'];
-//     $password = $_POST['password'];
-//     $password = password_hash($password, PASSWORD_BCRYPT);
-
-//     if (empty($username)) {
-//         array_push($errors, "Username is required");
-//     }
-//     if (empty($password)) {
-//         array_push($errors, "Password is required");
-//     }
-
-
-
-//     $user_check_query = "SELECT * FROM user WHERE username='$username' LIMIT 1";
-
-//     $statement = $db->prepare($user_check_query);
-//     $statement->execute();
-//     $result = $statement->fetchAll();
-//     $statement->closecursor();
-
-
-//     if (count($result) > 0) {
-//         if (password_verify($_POST['password'], $result[0]['password'])) {
-//             $_SESSION['username'] = $username;
-//             $_SESSION['success'] = "You are now logged in";
-//             $mainpage = "index.php";
-
-//             header("Location: " . $mainpage);
-//             exit();
-//         }
-//     }
-
-
-
-//     if (count($errors) == 0) {
-//         array_push($errors, "Username or Password is incorrect");
-//     }
-
