@@ -43,8 +43,6 @@
 
 
 
-
-
     <?php include('scripts.php'); ?>
 
 
