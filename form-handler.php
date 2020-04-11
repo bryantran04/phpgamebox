@@ -1,0 +1,80 @@
+
+<?php
+// session_start();
+
+$errors = array();
+
+if (isset($_POST['register'])) {
+    // receive all input values from the form
+    $username = ($_POST['username']);
+    $email = ($_POST['email']);
+    $password = ($_POST['password']);
+    $confirmpassword = ($_POST['confirmpassword']);
+    $firstname = ($_POST['firstname']);
+    $lastname = ($_POST['lastname']);
+    $description = ($_POST['description']);
+    $picture = $_FILES['image']['name'];
+    $target = "submitted_pictures/" . basename($picture);
+
+
+    if (empty($username)) {
+        array_push($errors, "Username is required");
+    }
+    if (empty($email)) {
+        array_push($errors, "Email is required");
+    }
+    if (empty($password)) {
+        array_push($errors, "Password is required");
+    }
+    if ($password != $confirmpassword) {
+        array_push($errors, "The two passwords do not match");
+    }
+
+
+    $user_check_query = "SELECT * FROM user WHERE username='$username' OR email='$email' LIMIT 1";
+    $statement = $db->prepare($user_check_query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $statement->closecursor();
+
+
+    if (count($result) > 0) { // if user exists
+        if ($result[0]['username'] === $username) {
+            array_push($errors, "Username already exists");
+        }
+
+        if ($result[0]['email'] === $email) {
+            array_push($errors, "email already exists");
+        }
+    }
+
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+        $msg = "Image uploaded successfully";
+    } else {
+        array_push($errors, "Failed to upload image");
+    }
+
+
+    if (count($errors) == 0) {
+
+        $password = password_hash($password, PASSWORD_BCRYPT);
+
+        $query = "INSERT INTO user (username, password, firstname, lastname, email, description, picture) 
+  			  VALUES(:username, :password, :firstname, :lastname, :email, :description, :picture)";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':username', $username);
+        $statement->bindValue(':password', $password);
+        $statement->bindValue(':firstname', $firstname);
+        $statement->bindValue(':lastname', $lastname);
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':description', $description);
+        $statement->bindValue(':picture', $picture);
+        $statement->execute();
+        $statement->closeCursor();        // $_SESSION['username'] = $username;
+        // $_SESSION['success'] = "You are now logged in";
+        $mainpage = "index.php";
+
+        header("Location: " . $mainpage);
+    }
+}
+?>
