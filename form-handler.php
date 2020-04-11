@@ -77,3 +77,45 @@ if (isset($_POST['register'])) {
         header("Location: " . $mainpage);
     }
 }
+
+
+if (isset($_POST['login'])) {
+    // receive all input values from the form
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $password = password_hash($password, PASSWORD_BCRYPT);
+
+    if (empty($username)) {
+        array_push($errors, "Username is required");
+    }
+    if (empty($password)) {
+        array_push($errors, "Password is required");
+    }
+
+
+
+    $user_check_query = "SELECT * FROM user WHERE username='$username' LIMIT 1";
+
+    $statement = $db->prepare($user_check_query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $statement->closecursor();
+
+
+    if (count($result) > 0) {
+        if (password_verify($_POST['password'], $result[0]['password'])) {
+            $_SESSION['username'] = $username;
+            $_SESSION['success'] = "You are now logged in";
+            $mainpage = "index.php";
+
+            header("Location: " . $mainpage);
+            exit();
+        }
+    }
+
+
+
+    if (count($errors) == 0) {
+        array_push($errors, "Username or Password is incorrect");
+    }
+}

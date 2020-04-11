@@ -16,8 +16,7 @@
             <li>
                 <form action="results.html">
                     <div class="input-group ml-5">
-                        <input type="search" id="navsearch" placeholder="What're you searching for?"
-                            class="form-control bg-secondary">
+                        <input type="search" id="navsearch" placeholder="What're you searching for?" class="form-control bg-secondary">
                         <div class="input-group-append">
                             <button type="submit" class="btn bg-secondary"><i class="fa fa-search"></i></button>
                         </div>
@@ -26,12 +25,20 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="signup.php">Sign up</a>
-            </li>
+            <?php if (isset($_SESSION['username'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?logout='1'">Logout</a>
+                </li>
+            <?php endif ?>
+            <?php if (!isset($_SESSION['username'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signup.php">Sign up</a>
+                </li>
+            <?php endif ?>
+
         </ul>
     </div>
 </nav>
@@ -53,14 +60,23 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Login</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Sign up</a>
-            </li>
+            <?php if (isset($_SESSION['username'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?logout='1'">Logout</a>
+                </li>
+            <?php endif ?>
+            <?php if (!isset($_SESSION['username'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign up</a>
+                </li>
+            <?php endif ?>
             <li class="nav-item">
                 <form action="results.html">
                     <div class="input-group">
-                        <input type="search" id="navsearch" placeholder="What're you searching for?"
-                            class="form-control bg-secondary">
+                        <input type="search" id="navsearch" placeholder="What're you searching for?" class="form-control bg-secondary">
                         <div class="input-group-append">
                             <button type="submit" class="btn bg-secondary"><i class="fa fa-search"></i></button>
                         </div>
