@@ -26,7 +26,6 @@
 
     </header>
 
-
     <div class="showcase">
         <div class="showcase-content">
             <div class="text">
