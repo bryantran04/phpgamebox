@@ -25,9 +25,9 @@ if (isset($_GET['logout'])) {
                 <a class="nav-link" href="#">Contact</a>
             </li>
             <li>
-                <form action="results.html">
+                <form action="results.php" method="get">
                     <div class="input-group ml-5">
-                        <input type="search" id="navsearch" placeholder="What're you searching for?" class="form-control bg-secondary">
+                        <input type="search" name="search" id="navsearch" placeholder="What're you searching for?" class="form-control bg-secondary">
                         <div class="input-group-append">
                             <button type="submit" class="btn bg-secondary"><i class="fa fa-search"></i></button>
                         </div>
