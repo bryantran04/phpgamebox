@@ -1,10 +1,10 @@
 <?php
 
 $errors = array();
-if (isset($_POST['submit_listing'])) {
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // receive all input values from the form
     $title = $_POST['title'];
-    $game = $_POST['game'];
+    $game = strtolower($_POST['game']);
     $location = $_POST['location'];
     $price = $_POST['price'];
     $game_condition = $_POST['condition'];
@@ -26,9 +26,6 @@ if (isset($_POST['submit_listing'])) {
 
 
     if (count($errors) == 0) {
-
-        //$password = password_hash($password, PASSWORD_BCRYPT);
-        //title	description	location	price	console	sold	picture	game_condition	game'
 
         $query = "INSERT INTO listing (owner,title, description, location, price, console, picture, game_condition, game) 
   			  VALUES(:owner, :title, :description, :location, :price, :console, :picture, :game_condition, :game)";

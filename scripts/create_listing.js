@@ -9,9 +9,9 @@ description_input_box.addEventListener('input', function () {
     description_length.textContent = description_input_box.value.length
 });
 
-
-
-
+var form = document.getElementById("listing-form");
+function handleForm(event) { event.preventDefault(); }
+form.addEventListener('submit', handleForm);
 
 function isInt(str) {
     var val = parseInt(str);
@@ -25,7 +25,7 @@ var checkMoneyExpression = function (str) {
 }
 
 
-
+var s = true;
 function checkListingForm() {
     const title = document.getElementById("title");
     const title_warning = document.getElementById("title_warning");
@@ -33,6 +33,7 @@ function checkListingForm() {
         title.style.borderColor = "red"
         title_warning.style.display = "block"
         title.focus()
+        s = false;
     } else {
         title.style.borderColor = "#ced4da"
         title_warning.style.display = "none"
@@ -46,6 +47,8 @@ function checkListingForm() {
 
         game.focus()
         game_warning.style.display = "block"
+        s = false;
+
     } else {
         game.style.borderColor = "#ced4da"
 
@@ -59,6 +62,8 @@ function checkListingForm() {
         location.style.borderColor = "red"
         location.focus()
         location_warning.style.display = "block"
+        s = false;
+
     } else {
         location.style.borderColor = "#ced4da"
         location_warning.style.display = "none"
@@ -71,6 +76,8 @@ function checkListingForm() {
         price.style.borderColor = "red"
         price_warning.style.display = "block"
         price.focus()
+        s = false;
+
     } else {
         price.style.borderColor = "#ced4da"
         price_warning.style.display = "none"
@@ -81,9 +88,15 @@ function checkListingForm() {
 
     if (description.value.length > 1000) {
         description_warning.style.display = "block"
-
         description.focus()
+        s = false;
     } else {
         description_warning.style.display = "none"
     }
+    console.log(s)
+    if (s == false) {
+        return false;
+    } else {
+        document.getElementById("listing-form").submit();
+    };
 }

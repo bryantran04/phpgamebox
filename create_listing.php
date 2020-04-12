@@ -25,7 +25,7 @@
     <?php if (isset($_SESSION['username'])) : ?>
         <div class="container mt-5">
             <!-- <form> -->
-            <form name="my-form" onsubmit="" action="" method="post" enctype="multipart/form-data">
+            <form name="my-form" id="listing-form" action="" method="post" enctype="multipart/form-data">
                 <input type="hidden" id="owner" name="owner" value="<?php echo $_SESSION['username'] ?>">
 
                 <div class="form-group">
@@ -79,7 +79,7 @@
                     <label for="picture">Upload Photo</label>
                     <input type="file" class="form-control-file" name="image" id="photo">
                 </div>
-                <button name="submit_listing" type="submit" class="btn btn-primary">Submit</button>
+                <button name="submit_listing" id="submit_listing" value="submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     <?php endif ?>
