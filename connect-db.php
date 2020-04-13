@@ -21,8 +21,8 @@ $hostname = 'localhost:3306';
 $dbname = 'gamebox';
 
 // database credentials
-$username = 'misran';
-$password = 'Misran1';
+$username = 'gamebox';
+$password = 'uva2020';
 
 // DSN (Data Source Name) specifies the host computer for the MySQL database 
 // and the name of the database. If the MySQL database is running on the same server

@@ -16,6 +16,7 @@
 <body>
     <?php include('form-handler.php') ?>
     <?php include('errors.php'); ?>
+    <?php echo getcwd(); ?>
 
     <main class="my-form">
         <div class="cotainer">

@@ -1,11 +1,6 @@
 <?php
 
-session_start();
 $errors = array();
-echo "<p>Hello</p>";
-var_dump($GLOBALS);
-echo $_POST;
-
 if (isset($_POST['submit_listing'])) {
     // receive all input values from the form
     $title = $_POST['title'];
@@ -14,19 +9,42 @@ if (isset($_POST['submit_listing'])) {
     $price = $_POST['price'];
     $game_condition = $_POST['condition'];
     $console = $_POST['console'];
+    $owner = $_POST['owner'];
+
     $description = $_POST['description'];
     //title	description	location	price	console	sold	picture, need condition and game
 
-    $picture = $_FILES['photo']['name'];
-    $target = "submitted_pictures/" . basename($picture);
+    $attachment = $_FILES['image']['name'];
+    $picture = "";
+    $picture2 = "";
+    $picture3 = "";
+    $target = "submitted_pictures/";// . basename($picture);
 
-    echo "<p>Test2</p>";
 
-    if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
+
+    if((count($_FILES['image']['name'])) == 3) {
+        $picture = $_FILES['image']['name'][0];
+        $picture2 = $_FILES['image']['name'][1];
+        $picture3 = $_FILES['image']['name'][2];
+        move_uploaded_file($_FILES["image"]["tmp_name"][0], $target . basename($picture));
+        move_uploaded_file($_FILES["image"]["tmp_name"][1], $target . basename($picture2));
+        move_uploaded_file($_FILES["image"]["tmp_name"][2], $target . basename($picture3));
+        $msg = "Images uploaded successfully";
+    } elseif (count($_FILES['image']['name']) == 2) {
+        $picture = $_FILES['image']['name'][0];
+        $picture2 = $_FILES['image']['name'][1];
+        move_uploaded_file($_FILES["image"]["tmp_name"][0], $target . basename($picture));
+        move_uploaded_file($_FILES["image"]["tmp_name"][1], $target . basename($picture2));
+        $msg = "Images uploaded successfully";
+    } elseif (count($_FILES['image']['name']) == 1) {
+        $picture = $_FILES['image']['name'][0];
+        move_uploaded_file($_FILES["image"]["tmp_name"][0], $target . basename($picture));
         $msg = "Image uploaded successfully";
-    } else {
+    } else{
         array_push($errors, "Failed to upload image");
     }
+
+
 
 
     if (count($errors) == 0) {
@@ -34,32 +52,22 @@ if (isset($_POST['submit_listing'])) {
         //$password = password_hash($password, PASSWORD_BCRYPT);
         //title	description	location	price	console	sold	picture	game_condition	game'
 
-        $title = "This is a test";
-        $description = "Test";
-        $location = "Test";
-        $price = 0.99;
-        $console = "PS4";
-        $picture = "TestPath";
-        $game_condition = "New";
-        $game = "Test";
-
-        echo var_dump($title)."<br>";
-
-        $query = "INSERT INTO listing (title, description, location, price, console, picture, game_condition, game) 
-  			  VALUES(:title, :description, :location, :price, :console, :picture, :game_condition, :game)";
+        $query = "INSERT INTO listing (owner,title, description, location, price, console, picture, picture2, picture3, game_condition, game) 
+  			  VALUES(:owner, :title, :description, :location, :price, :console, :picture, :picture2, :picture3, :game_condition, :game)";
         $statement = $db->prepare($query);
+        $statement->bindValue(':owner', $owner);
         $statement->bindValue(':title', $title);
         $statement->bindValue(':description', $description);
         $statement->bindValue(':location', $location);
         $statement->bindValue(':price', $price);
         $statement->bindValue(':console', $console);
         $statement->bindValue(':picture', $picture);
+        $statement->bindValue(':picture2', $picture2);
+        $statement->bindValue(':picture3', $picture3);
         $statement->bindValue(':game_condition', $game_condition);
         $statement->bindValue(':game', $game);
         $statement->execute();
         $statement->closeCursor();
-        $_SESSION['username'] = $username;
-        $_SESSION['success'] = "You are now logged in";
         $mainpage = "index.php";
 
         header("Location: " . $mainpage);
