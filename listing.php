@@ -29,6 +29,8 @@
                 $title = $result[0]["title"];
                 $condition = $result[0]["game_condition"];
                 $picture = $result[0]["picture"];
+                $picture2 = $result[0]["picture2"];
+                $picture3 = $result[0]["picture3"];
                 $description = $result[0]["description"];
                 $owner = $result[0]["owner"];
                 $game = $result[0]["game"];
@@ -36,6 +38,14 @@
                 $location = $result[0]["location"];
                 $price = $result[0]["price"];
                 $date_posted = $result[0]["dateposted"];
+                $count = 1;
+
+                if ($picture2 != "") {
+                    $count += 1;
+                    if ($picture3 != "") {
+                        $count += 1;
+                    }
+                }
             } else {
                 echo "<h1>Listing Not found<h1>";
             }
@@ -88,23 +98,28 @@
                     <div id="slider3" class="carousel slide mb-5" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li class="active" data-target="#slider3" data-slide-to="0"></li>
-                            <li data-target="#slider3" data-slide-to="1"></li>
-                            <li data-target="#slider3" data-slide-to="2"></li>
-                            <li data-target="#slider3" data-slide-to="3"></li>
+                            <?php if ($count > 1) : ?>
+                                <li data-target="#slider3" data-slide-to="1"></li>
+                            <?php endif ?>
+                            <?php if ($count > 2) : ?>
+                                <li data-target="#slider3" data-slide-to="2"></li>
+                            <?php endif ?>
+
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="post_img" src="./images/place_holder/sword.jpg" alt="First Slide">
+                                <img class="post_img" src="./submitted_pictures/<?php echo $picture ?>" alt="First Slide">
                             </div>
-                            <div class="carousel-item">
-                                <img class="post_img" src="./images/place_holder/sword_art.jpeg" alt="Second Slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="post_img" src="./images/place_holder/sword_battle.jpg" alt="Third Slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="post_img" src="./images/place_holder/sword_battle2.jpg" alt="Fourth Slide">
-                            </div>
+                            <?php if ($count > 1) : ?>
+                                <div class="carousel-item">
+                                    <img class="post_img" src="./submitted_pictures/<?php echo $picture2 ?>" alt="Second Slide">
+                                </div>
+                            <?php endif ?>
+                            <?php if ($count > 2) : ?>
+                                <div class="carousel-item">
+                                    <img class="post_img" src="./submitted_pictures/<?php echo $picture3 ?>" alt="Third Slide">
+                                </div>
+                            <?php endif ?>
                         </div>
 
                         <!-- CONTROLS -->

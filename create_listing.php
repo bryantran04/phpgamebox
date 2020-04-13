@@ -77,7 +77,7 @@
                 </div>
                 <div class="form-group">
                     <label for="picture">Upload Photo</label>
-                    <input type="file" class="form-control-file" name="image" id="photo">
+                    <input type="file" class="form-control-file" name="image[]" id="photo" multiple>
                 </div>
                 <button name="submit_listing" id="submit_listing" value="submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
