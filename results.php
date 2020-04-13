@@ -15,7 +15,7 @@
         <div id="nav-placeholder"></div>
         <!-- Will remove after we start php -->
         <?php include 'connect-db.php'; ?>
-        <?php include 'navbar.php'; ?>
+        <?php include('navbar.php'); ?>
 
     </header>
     <?php
@@ -29,10 +29,6 @@
         $statement->execute();
         $results = $statement->fetchAll();
         $statement->closecursor();
-
-        foreach ($results as $value) {
-            echo $value["location"] . "<br/>";
-        }
     }
     ?>
     <div class="container mt-5">
@@ -77,7 +73,7 @@
                 echo "<h5 class='card-title'>" . $value["title"] . "</h5>";
                 echo "<h6 class='price'>$" . $value["price"] . "</h6>";
                 echo "<p class='card-text'>" . $value["description"] . "</p>";
-                echo "<a href='#' class='btn btn-primary'>Go somewhere</a>";
+                echo "<a href='listing.php?listing=" . $value["id"]  . "' class='btn btn-primary'>Goto Listing Page</a>";
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";

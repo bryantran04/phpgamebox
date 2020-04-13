@@ -22,8 +22,8 @@
 try {
     $username = $_GET['username'];
 
-    $user_check_query = "SELECT * FROM user WHERE username='$username' LIMIT 1";
-    $statement = $db->prepare($user_check_query);
+    $query = "SELECT * FROM user WHERE username='$username' LIMIT 1";
+    $statement = $db->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
     $statement->closecursor();
