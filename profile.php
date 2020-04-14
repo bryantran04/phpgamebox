@@ -18,8 +18,8 @@
 
 </body>
 
-<?php
-try {
+<?php if (isset($_GET['username'])) : ?>
+    <?php
     $username = $_GET['username'];
 
     $query = "SELECT * FROM user WHERE username='$username' LIMIT 1";
@@ -36,38 +36,90 @@ try {
     } else {
         echo "<h1>Page Not found<h1>";
     }
-} catch (Exception $e) {
-}
 
-?>
+    $query = "SELECT * FROM listing WHERE owner='$username'";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $listings = $statement->fetchAll();
+    $statement->closecursor();
 
-<div class="container content mt-5">
-    <div class="row profile">
-        <div class="col-md-3">
-            <div class="profile-sidebar position-fixed">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-picture">
-                    <img src="<?php echo $picture ?>" class="profile-picture" alt="">
-                </div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
-                        <?php echo ucwords($fullname); ?>
-                        <div> <?php echo $description ?>
+
+    ?>
+<?php endif ?>
+<?php if (isset($_GET['username'])) : ?>
+
+    <div class="container content mt-5">
+        <div class="row profile">
+            <div class="col-md-3">
+                <div class="profile-sidebar position-fixed">
+                    <!-- SIDEBAR USERPIC -->
+                    <div class="profile-picture">
+                        <img src="<?php echo $picture ?>" class="profile-picture" alt="">
+                    </div>
+                    <!-- END SIDEBAR USERPIC -->
+                    <!-- SIDEBAR USER TITLE -->
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name">
+                            <?php echo ucwords($fullname); ?>
+                            <div> <?php echo $description ?>
+                            </div>
+
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="profile-content">
+                    <h1>Selling</h1>
+                    <div class="container mt-5">
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h1 class="display-6">Shopping Cart</h1>
+
+                            </div>
+
+                        </div>
+                        <div class="listings">
+
+                            <?php
+
+                            foreach ($listings as $value) {
+                                echo "<div class='card mb-5 listing'>";
+                                echo "<div class='card-header'>";
+                                echo "<span>" . ucwords($value["game"]) . "</span>";
+                                echo "<h6 class='date'>" . $value["dateposted"] . "</h6>";
+                                echo "</div>";
+                                echo "<div class='row p-3'>";
+                                echo "<div class='col-sm-6 col-md-4 col-lg-3 col-xl-2'>";
+                                echo "<img class='listing_img' src='./submitted_pictures/" . $value["picture"] . "'>";
+                                echo "</div>";
+                                echo "<div class='col-sm-6 col-md-8 col-lg-9 col-xl-10'>";
+                                echo "<div class='card-body'>";
+                                echo "<h5 class='card-title'>" . $value["title"] . "</h5>";
+                                echo "<h6 class='price'>$" . $value["price"] . "</h6>";
+                                echo "<p class='card-text'>" . $value["description"] . "</p>";
+                                echo "<a href='listing.php?listing=" . $value["id"]  . "' class='btn btn-primary'>Goto Listing Page</a>";
+                                echo "<form action='' method='post'>";
+                                echo "<input type='hidden' id='listingid' name='listingid' value=" . $value["id"] . ">";
+                                echo "<button name='edit' id='edit' value='submit' type='submit' class='mt-1 btn btn-warning'>Edit</button>";
+                                echo "</form>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</div>";
+                            }
+
+                            ?>
+
+                        </div>
+
+
 
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <div class="profile-content">
-                <h1>Selling</h1>
-
-            </div>
-        </div>
     </div>
-</div>
+<?php endif ?>
 
 </html>

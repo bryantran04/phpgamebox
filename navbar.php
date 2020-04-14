@@ -35,6 +35,9 @@ if (isset($_GET['logout'])) {
         <ul class="navbar-nav ml-auto">
             <?php if (isset($_SESSION['username'])) : ?>
                 <li class="nav-item">
+                    <a class="nav-link" href="profile.php?username=<?php echo $_SESSION['username'] ?>">My Profile</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="create_listing.php">Sell</a>
                 </li>
                 <li class="nav-item">
@@ -71,6 +74,9 @@ if (isset($_GET['logout'])) {
                 <a class="nav-link" href="#">Login</a>
             </li>
             <?php if (isset($_SESSION['username'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.php?username=<?php echo $_SESSION['username'] ?>">My Profile</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="create_listing.php">Sell</a>
                 </li>
