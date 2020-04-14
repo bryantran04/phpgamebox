@@ -33,6 +33,7 @@
         $fullname = $result[0]["firstname"] . " " . $result[0]["lastname"];
         $picture = "./submitted_pictures/" . $result[0]["picture"];
         $description = $result[0]["description"];
+        $email = $result[0]["email"];
     } else {
         echo "<h1>Page Not found<h1>";
     }
@@ -63,6 +64,8 @@
                             <?php echo ucwords($fullname); ?>
                             <div> <?php echo $description ?>
                             </div>
+                            <div> <?php echo $email ?>
+                            </div>
 
                         </div>
                     </div>
@@ -70,11 +73,10 @@
             </div>
             <div class="col-md-9">
                 <div class="profile-content">
-                    <h1>Selling</h1>
                     <div class="container mt-5">
                         <div class="jumbotron jumbotron-fluid">
                             <div class="container">
-                                <h1 class="display-6">Shopping Cart</h1>
+                                <h1 class="display-6">Selling</h1>
 
                             </div>
 

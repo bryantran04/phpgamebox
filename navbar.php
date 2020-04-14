@@ -18,9 +18,6 @@ if (isset($_GET['logout'])) {
             <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
             <li>
                 <form action="results.php" method="get">
                     <div class="input-group ml-5">
@@ -66,9 +63,6 @@ if (isset($_GET['logout'])) {
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Login</a>

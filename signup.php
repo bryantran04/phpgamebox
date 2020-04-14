@@ -15,20 +15,15 @@
 
 <body>
     <?php include('form-handler.php') ?>
-    <?php include('errors.php'); ?>
 
-    <main class="my-form">
-        <div class="cotainer">
+    <main id="signup-form">
+        <div class=" mt-5 container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">Register</div>
                         <div class="card-body">
-                            <!-- <form name="my-form" onsubmit="return validform()" action="form-handler.php" method="post"> -->
                             <form name="my-form" onsubmit="" action="" method="post" enctype="multipart/form-data">
-
-
-
                                 <div class="form-group row">
                                     <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
                                     <div class="col-md-6">
@@ -93,9 +88,15 @@
                                         Register
                                     </button>
                                 </div>
+
+                                <div class="col-md-6 offset-md-4">
+                                    <?php include('errors.php'); ?>
+                                </div>
                         </div>
                         </form>
+
                     </div>
+
                 </div>
             </div>
         </div>
