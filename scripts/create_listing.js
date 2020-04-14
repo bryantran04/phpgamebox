@@ -29,7 +29,7 @@ var s = true;
 function checkListingForm() {
     const title = document.getElementById("title");
     const title_warning = document.getElementById("title_warning");
-    if (title.value.length < 10) {
+    if (title.value.length < 8) {
         title.style.borderColor = "red"
         title_warning.style.display = "block"
         title.focus()

@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label>Title</label>
                     <input type="input" class="form-control" id="title" name="title">
-                    <div id="title_warning" class="warning">Title must have at least 10 characters</div>
+                    <div id="title_warning" class="warning">Title must have at least 8 characters</div>
                 </div>
                 <div class="form-group">
                     <label for="game">Game</label>

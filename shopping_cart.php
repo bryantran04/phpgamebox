@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include('cdn.php'); ?>
-
     <title>Gamebox</title>
 </head>
 
@@ -15,50 +14,61 @@
         <div id="nav-placeholder"></div>
         <!-- Will remove after we start php -->
         <?php include 'connect-db.php'; ?>
-        <?php include('navbar.php'); ?>
+        <?php include 'navbar.php'; ?>
 
     </header>
-    <?php
 
-    if ($_SERVER['REQUEST_METHOD'] == "GET") {
-        $game = strtolower($_GET['search']);
+    <?php if (isset($_SESSION['username'])) : ?>
 
+        <?php
 
-        $query = "SELECT * FROM listing WHERE game like '%$game%'";
+        if (isset($_POST['delete_cart'])) {
+            $listingid = $_POST['listingid'];
+            $username = $_SESSION['username'];
+
+            $query = "DELETE FROM shoppingcart WHERE username='$username' AND listingid='$listingid'";
+            $statement = $db->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll();
+            $statement->closecursor();
+        }
+
+        $username = $_SESSION['username'];
+        $query = "SELECT * FROM shoppingcart WHERE username='$username'";
         $statement = $db->prepare($query);
         $statement->execute();
         $results = $statement->fetchAll();
         $statement->closecursor();
-    }
-    ?>
+
+        $listings = array();
+
+        foreach ($results as $shopping_cart_item) {
+            $listingid = $shopping_cart_item["listingid"];
+            $query = "SELECT * FROM listing WHERE id='$listingid'";
+            $statement = $db->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll();
+            $statement->closecursor();
+            array_push($listings, $results[0]);
+        }
+
+
+        ?>
+    <?php endif ?>
+
     <div class="container mt-5">
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-6">Results for <?php echo $game  ?></h1>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas recusandae
-                    voluptatibus, natus
-                    architecto asperiores
-                    a.
-                </p>
+                <h1 class="display-6">Shopping Cart</h1>
+
             </div>
 
-        </div>
-
-        <div class="form-group">
-            Sort By:
-            <select class="custom-select sort_option" name="sort_option">
-                <option value=""></option>
-                <option value="lowest">Price (Lowest First)</option>
-                <option value="highest">Price (Highest First)</option>
-                <option value="newest">Newest Listing</option>
-                <option value="oldest">Oldest Listing</option>
-            </select>
         </div>
         <div class="listings">
 
             <?php
 
-            foreach ($results as $value) {
+            foreach ($listings as $value) {
                 echo "<div class='card mb-5 listing'>";
                 echo "<div class='card-header'>";
                 echo "<span>" . ucwords($value["game"]) . "</span>";
@@ -74,6 +84,10 @@
                 echo "<h6 class='price'>$" . $value["price"] . "</h6>";
                 echo "<p class='card-text'>" . $value["description"] . "</p>";
                 echo "<a href='listing.php?listing=" . $value["id"]  . "' class='btn btn-primary'>Goto Listing Page</a>";
+                echo "<form action='' method='post'>";
+                echo "<input type='hidden' id='listingid' name='listingid' value=" . $value["id"] . ">";
+                echo "<button name='delete_cart' id='delete_cart' value='submit' type='submit' class='mt-1 btn btn-warning'>Delete from Cart</button>";
+                echo "</form>";
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";
@@ -87,8 +101,10 @@
 
 
     </div>
+
+
     <?php include('scripts.php'); ?>
-    <script src="./scripts/listings.js"></script>
+
 </body>
 
 </html>

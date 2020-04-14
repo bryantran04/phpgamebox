@@ -52,23 +52,31 @@
         } catch (Exception $e) {
             echo "<h1>" . $e . "</h1>";
         }
-    
+
         if (isset($_POST['add_cart'])) {
             $username = $_POST['username'];
             $listingid = $_GET['listing'];
 
-
-            $query = "INSERT INTO shoppingcart (username, listingid) VALUES (:username, :listingid)";
-            
+            $query = "SELECT * FROM shoppingcart WHERE username='$username' AND listingid='$listingid' LIMIT 1";
             $statement = $db->prepare($query);
-            $statement->bindValue(':username', $username);
-            $statement->bindValue(':listingid', $listingid);
             $statement->execute();
-            $statement->closeCursor();
-            $mainpage = "index.php";
-    
-            header("Location: " . $mainpage);
+            $results = $statement->fetchAll();
+            $statement->closecursor();
 
+            if (count($results) == 0) {
+                $query = "INSERT INTO shoppingcart (username, listingid) VALUES (:username, :listingid)";
+
+                $statement = $db->prepare($query);
+                $statement->bindValue(':username', $username);
+                $statement->bindValue(':listingid', $listingid);
+                $statement->execute();
+                $statement->closeCursor();
+            }
+
+
+            $mainpage = "shopping_cart.php";
+
+            header("Location: " . $mainpage);
         }
 
 

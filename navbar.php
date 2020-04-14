@@ -19,9 +19,6 @@ if (isset($_GET['logout'])) {
                 <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
             </li>
             <li>
@@ -37,6 +34,12 @@ if (isset($_GET['logout'])) {
         </ul>
         <ul class="navbar-nav ml-auto">
             <?php if (isset($_SESSION['username'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="create_listing.php">Sell</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="shopping_cart.php">Cart</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?logout='1'">Logout</a>
                 </li>
@@ -62,15 +65,18 @@ if (isset($_GET['logout'])) {
                 <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Login</a>
             </li>
             <?php if (isset($_SESSION['username'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="create_listing.php">Sell</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="shopping_cart.php">Cart</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?logout='1'">Logout</a>
                 </li>
