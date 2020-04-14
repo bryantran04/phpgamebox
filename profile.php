@@ -54,15 +54,17 @@ try {
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
                         <?php echo ucwords($fullname); ?>
+                        <div> <?php echo $description ?>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-9">
             <div class="profile-content">
-                <h1>test</h1>
+                <h1>Selling</h1>
 
-                <?php echo $description ?>
             </div>
         </div>
     </div>
