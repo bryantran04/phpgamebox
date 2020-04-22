@@ -30,10 +30,7 @@ if (isset($_POST['register'])) {
 
 
     $user_check_query = "SELECT * FROM user WHERE username='$username' OR email='$email' LIMIT 1";
-    $statement = $db->prepare($user_check_query);
-    $statement->execute();
-    $result = $statement->fetchAll();
-    $statement->closecursor();
+    $result = preparequery($user_check_query);
 
 
     if (count($result) > 0) {
@@ -95,10 +92,8 @@ if (isset($_POST['login'])) {
 
     $user_check_query = "SELECT * FROM user WHERE username='$username' LIMIT 1";
 
-    $statement = $db->prepare($user_check_query);
-    $statement->execute();
-    $result = $statement->fetchAll();
-    $statement->closecursor();
+    $result = preparequery($user_check_query);
+
 
 
     if (count($result) > 0) {

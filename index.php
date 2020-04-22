@@ -39,10 +39,6 @@
 
     </div>
 
-    <?php if (isset($_SESSION['username'])) : ?>
-
-        <p>Hello User</p>
-    <?php endif ?>
 
     <?php include('scripts.php'); ?>
 
